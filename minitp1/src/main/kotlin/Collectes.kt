@@ -26,18 +26,22 @@
 // LE DOMAINE : une coopérative agricole malgache
 // ----------------------------------------------------------------------------
 
+
+//A-1
 data class Produit(
     val code: String,
     val nom: String,
     val prixKg: Double?,   // null = prix non encore fixé par la coopérative
 )
 
+//A-1
 data class Producteur(
     val id: Int,
     val nom: String,
     val village: String,
 )
 
+//A-1
 data class Collecte(
     val produit: Produit,
     val producteur: Producteur,
@@ -49,17 +53,20 @@ data class Collecte(
 // JEU DE DONNÉES (fourni)
 // ----------------------------------------------------------------------------
 
+//A-1
 val vanille = Produit("VAN", "Vanille", 250_000.0)
 val cafe    = Produit("CAF", "Café", 12_000.0)
 val girofle = Produit("GIR", "Girofle", 38_000.0)
 val litchi  = Produit("LIT", "Litchi", null)          // prix non fixé
 
-val producteurs = listOf(
+//A-2
+val producteurs = listOf(                           /*tableau producteur*/
     Producteur(1, "RAKOTO Jean", "Ambodivoara"),
     Producteur(2, "RASOA Marie", "Antsirabe Nord"),
     Producteur(3, "RANDRIA Paul", "Ambodivoara"),
 )
 
+//A-2
 val collectes = listOf(
     Collecte(vanille, producteurs[0], 4.5,  "2026-08-01"),
     Collecte(cafe,    producteurs[1], 20.0, "2026-08-01"),
@@ -76,25 +83,29 @@ val collectes = listOf(
 // ----------------------------------------------------------------------------
 
 /** Formate un montant en ariary : 1250000.0 -> "1 250 000 Ar" */
+//A-2
 fun formatAriary(montant: Double): String {
-    val entier = montant.toLong().toString()
-    val groupes = entier.reversed().chunked(3).joinToString(" ").reversed()
+    val entier = montant.toLong().toString()          //A-2
+    val groupes = entier.reversed().chunked(3).joinToString(" ").reversed()  //A-2
     return "$groupes Ar"
 }
 
 /** Résumé d'une collecte, avec gestion du prix éventuellement absent. */
+//A-2
 fun Collecte.resume(): String {
-    val valeur = produit.prixKg?.let { formatAriary(poidsKg * it) } ?: "prix non fixé"
+    val valeur = produit.prixKg?.let { formatAriary(poidsKg * it) } ?: "prix non fixé"  //A-2
     return "${poidsKg} kg de ${produit.nom} (${producteur.nom}) — $valeur"
 }
 
 /** Les noms des produits collectés, sans doublon, triés. */
+//A-2
 fun produitsCollectes(liste: List<Collecte>): List<String> =
-    liste.map { it.produit.nom }.distinct().sorted()
+    liste.map { it.produit.nom }.distinct().sorted() //A-2
 
 /** Les collectes d'un village donné. */
+//A-2
 fun collectesDuVillage(liste: List<Collecte>, village: String): List<Collecte> =
-    liste.filter { it.producteur.village == village }
+    liste.filter { it.producteur.village == village }  //A-2
 
 // ----------------------------------------------------------------------------
 // PARTIE C — LES 5 TROUS À COMPLÉTER (un concept par trou)
@@ -170,6 +181,7 @@ fun producteurLePlusActif(liste: List<Collecte>): Producteur? {
 // VÉRIFICATION DES TROUS — décommentez l'appel dans main() au fur et à mesure
 // ----------------------------------------------------------------------------
 
+//A-1
 fun verifierTrous() {
     println("--- Vérification des trous ---")
     println("T1  poids corrigé : " + corrigerPoids(collectes[0], 5.0).poidsKg + "   (attendu : 5.0)")
@@ -188,6 +200,7 @@ fun verifierTrous() {
 // MAIN — PARTIE B : les 4 appels à PRÉDIRE (P1..P4) avant exécution
 // ----------------------------------------------------------------------------
 
+//A-1
 fun main() {
     println("=== Coopérative — collectes du 01 au 03 août 2026 ===")
 
