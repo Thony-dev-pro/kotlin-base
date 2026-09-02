@@ -119,7 +119,9 @@ fun collectesDuVillage(liste: List<Collecte>, village: String): List<Collecte> =
  * Exemple attendu : corrigerPoids(c, 5.0).poidsKg == 5.0
  */
 fun corrigerPoids(c: Collecte, nouveauPoidsKg: Double): Collecte {
-    TODO("Trou n°1 — une ligne avec copy()")
+    //TODO("Trou n°1 — une ligne avec copy()")
+    val collecteCopy = c.copy(poidsKg = nouveauPoidsKg)
+    return collecteCopy
 }
 
 /**
@@ -131,7 +133,9 @@ fun corrigerPoids(c: Collecte, nouveauPoidsKg: Double): Collecte {
  *   prixEstime(collectes[4]) == null        (litchi : prix non fixé)
  */
 fun prixEstime(c: Collecte): Double? {
-    TODO("Trou n°2 — une ligne avec ?.")
+    //TODO("Trou n°2 — une ligne avec ?.")
+    val prix = c.produit.prixKg?.let {c.poidsKg * c.produit.prixKg} ?: null
+    return prix
 }
 
 /**
@@ -143,7 +147,16 @@ fun prixEstime(c: Collecte): Double? {
  * Utilisez une expression when (sans if).
  */
 fun categorieDePoids(c: Collecte): String {
-    TODO("Trou n°3 — une expression when")
+    //TODO("Trou n°3 — une expression when")
+    val categorie = when(c.poidsKg < 10){
+        true -> "petite"
+        false -> when(c.poidsKg > 25) {
+            true -> "grosse"
+            false -> "moyenne"
+        }
+        else -> "moyenne"
+    }
+    return categorie
 }
 
 /**
@@ -154,7 +167,9 @@ fun categorieDePoids(c: Collecte): String {
  * Indice : groupBy, puis mapValues + sumOf — en une expression.
  */
 fun totalParProduit(liste: List<Collecte>): Map<String, Double> {
-    TODO("Trou n°4 — groupBy + mapValues/sumOf")
+    //TODO("Trou n°4 — groupBy + mapValues/sumOf")
+    val sommeProduits = liste.groupBy { it.produit.nom }.mapValues { it.value.sumOf {it.poidsKg} }
+    return sommeProduits
 }
 
 /**
@@ -165,7 +180,9 @@ fun totalParProduit(liste: List<Collecte>): Map<String, Double> {
  * prixEstime (trou n°2).
  */
 fun collectesValorisables(liste: List<Collecte>): List<Collecte> {
-    TODO("Trou n°5 — filter + sortedByDescending")
+    //TODO("Trou n°5 — filter + sortedByDescending")
+    val listeTri  = liste.filter {prixEstime(it) != null}.sortedByDescending { prixEstime(it) }
+    return listeTri
 }
 
 /**
@@ -175,6 +192,7 @@ fun collectesValorisables(liste: List<Collecte>): List<Collecte> {
  */
 fun producteurLePlusActif(liste: List<Collecte>): Producteur? {
     TODO("Bonus ★ — groupBy + maxByOrNull")
+    //val actif = liste.groupBy {it.producteur.nom}.maxByOrNull {it.value}
 }
 
 // ----------------------------------------------------------------------------
