@@ -1,0 +1,2 @@
+- programme3kt , durée
+- async lance la couritine et n'attends pas mais passe tout de suite à la ligne suivante donc poidsVanille est déjà lancé au moment du lancement de poidsCafe. Le code s'arrête pour attendre poidsVanille.await() , quand poidsVanille.await() est fini poidsCafe.await() est déjà terminé aussi. 
