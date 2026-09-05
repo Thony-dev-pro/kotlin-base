@@ -1,0 +1,4 @@
+- Oui, il désigne la bonne ligne : ligne 29.
+- Oui, c'est la bonne cause : dans MainActivity R.id.btnPartage sans 'r', mais dans activity_main.xml btnPartager est avec 'r' donc le findViewById renvoi null. 
+- Oui la solution proposée est bonne : changer le R.id.btnPartage en R.id.btnPartager dans MainActivity.kt.
+- Après vérification du fichier activity_main.xml du projet, la correction est correcte.
