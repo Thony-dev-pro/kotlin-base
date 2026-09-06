@@ -1,1 +1,1 @@
-- Les deux versions sont correctes , le code actuel est simple et facile à lire.Pareil la version de l'IA qui est aussi facile à lire et simple. 
+- L'IA donne une version avec un row.  Les deux versions sont correctes , le code actuel est simple et facile à lire.Pareil la version de l'IA qui est aussi facile à lire et simple. 
