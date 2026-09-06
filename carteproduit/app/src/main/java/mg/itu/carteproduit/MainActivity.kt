@@ -78,12 +78,18 @@ fun ProduitCard(produit: Produit) {
     //          else MaterialTheme.colorScheme.surfaceVariant
     //      )
 
+    var selectionnee by remember {mutableStateOf(false)}
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
+            .padding(16.dp)
+            .clickable {selectionnee = !selectionnee}
+        ,
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant
+            containerColor = if(selectionnee)
+                MaterialTheme.colorScheme.primaryContainer
+            else MaterialTheme.colorScheme.surfaceVariant
         ),
     ) {
         Column(Modifier.padding(16.dp)) {
@@ -101,12 +107,12 @@ fun ProduitCard(produit: Produit) {
 
             // TODO A :
             // 1. Déclarez EN HAUT de la fonction (au-dessus de la Card) :
-            //      var quantite by remember { mutableStateOf(0) }
+            var quantite by remember { mutableStateOf(0) }
             // 2. Remplacez les deux lignes ci-dessous par :
             //      Text("Quantité : $quantite kg")
             //      Button(onClick = { quantite++ }) { Text("Ajouter 1 kg") }
-            Text("Quantité : (TODO A)")
-            Button(onClick = { /* TODO A */ }) { Text("Ajouter 1 kg") }
+            Text("Quantité : $quantite kg")
+            Button(onClick = { quantite++ }) { Text("Ajouter 1 kg") }
         }
     }
 }
