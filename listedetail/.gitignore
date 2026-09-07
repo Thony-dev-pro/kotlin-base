@@ -1,0 +1,30 @@
+# Gradle files
+.gradle/
+build/
+
+# IntelliJ IDEA / Android Studio files
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Android files
+local.properties
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.ap_
+*.dex
+
+# Kotlin / Java files
+*.class
+bin/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Secrets
+google-services.json
