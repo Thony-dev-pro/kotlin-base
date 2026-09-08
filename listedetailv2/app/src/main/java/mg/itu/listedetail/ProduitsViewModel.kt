@@ -33,8 +33,8 @@ class ProduitsViewModel : ViewModel() {
     // a le droit d'écrire. Le uiState public est en LECTURE SEULE : l'UI
     // ne fait qu'observer. C'est le flux unidirectionnel du cours.
     // -----------------------------------------------------------------------
-    val uiState: StateFlow<EtatUi> =
-        MutableStateFlow(EtatUi(produits = produits))   // provisoire : figé
+    private val _uiState = MutableStateFlow(EtatUi(produits = produits))
+    val uiState : StateFlow<EtatUi> = _uiState
 
     /** Appelée par l'écran de détail quand l'utilisateur ajoute au panier. */
     fun ajouterAuPanier(poidsKg: Int) {
@@ -49,5 +49,9 @@ class ProduitsViewModel : ViewModel() {
         // L'état change -> le StateFlow émet -> l'écran qui l'observe
         // se recompose. Personne n'a « mis à jour l'écran ».
         // -------------------------------------------------------------------
+
+        _uiState.update { etat ->
+            etat.copy(poidsPanierKg = etat.poidsPanierKg + poidsKg)
+        }
     }
 }
