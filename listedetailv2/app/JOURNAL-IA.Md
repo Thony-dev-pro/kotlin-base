@@ -1,0 +1,2 @@
+Le point le plus pertinente des remarques de l'IA est l'ajout de contrôle de la positivité de la valeur poids à ajouter dans la fonction "ajouterPanier" qui est important pour que les données restent corretes.  
+Pour les points non pertinentes , l'IA propose l'utilisation de SavedStateHandle pour la persistance à la mort du process mais qui est hors périmètre pour le moment. 
