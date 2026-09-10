@@ -63,6 +63,8 @@ interface ProduitDao {
     //     @Query("...")
     //     fun parPrixDecroissant(): Flow<List<Produit>>
     // -----------------------------------------------------------------------
+    @Query("SELECT * FROM produits ORDER BY prixKg IS NULL , prixKg DESC")
+    fun parPrixDecroissant() : Flow<List<Produit>>
 
     // -----------------------------------------------------------------------
     // TODO 2 — FILTRE : les produits dont le stock dépasse un seuil donné,
@@ -94,7 +96,7 @@ abstract class AppDatabase : RoomDatabase() {
         @Volatile private var instance: AppDatabase? = null
 
         fun obtenir(context: Context): AppDatabase =
-            instance ?: synchronized(this) {
+            instance ?: synchronized(this) {    //un seul thread à la fois
                 instance ?: Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,

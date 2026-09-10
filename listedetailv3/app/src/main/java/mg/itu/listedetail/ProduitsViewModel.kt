@@ -42,13 +42,13 @@ class ProduitsViewModel(application: Application) : AndroidViewModel(application
     }
 
     /**
-     * L'état de l'écran = les produits (selon le mode choisi) + le stock total.
+     * L'état de l'écran = les produits (selon le mode choisi) + le stock total.t
      * combine() fusionne plusieurs Flow en un seul : dès que l'un ré-émet,
      * l'état est recalculé et l'écran se recompose.
      */
     val uiState: StateFlow<EtatUi> =
         combine(
-            dao.tousLesProduits(),
+            dao.parPrixDecroissant(),
             mode,
         ) { produits, modeCourant ->
             EtatUi(produits = produits, mode = modeCourant)
