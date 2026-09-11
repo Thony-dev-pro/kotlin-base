@@ -48,10 +48,12 @@ class ProduitsViewModel(application: Application) : AndroidViewModel(application
      */
     val uiState: StateFlow<EtatUi> =
         combine(
-            dao.parPrixDecroissant(),
+            dao.tousLesProduits(),
+                   dao.parPrixDecroissant(),
+            dao.stockSuperieurA(10.0),
+                    dao.stockTotal(),
             mode,
-        ) { produits, modeCourant ->
-            EtatUi(produits = produits, mode = modeCourant)
+        ) { parNom,parPrix, stockOk, total, modeCourant ->
 
             // ----------------------------------------------------------------
             // ÉTAPE 3 — brancher VOS requêtes (après les TODO du DAO)
@@ -78,6 +80,14 @@ class ProduitsViewModel(application: Application) : AndroidViewModel(application
             // Objectif minimal : AU MOINS un mode réellement branché,
             // et le stock total affiché.
             // ----------------------------------------------------------------
+
+            val liste  =  when(modeCourant) {
+                ModeAffichage.NOM -> parNom
+                ModeAffichage.PRIX_DECROISSANT -> parPrix
+                ModeAffichage.STOCK_SUFFISANT -> stockOk
+                else -> parNom
+            }
+            EtatUi(produits = liste, mode = modeCourant , stockTotal =total )
         }.stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5_000),

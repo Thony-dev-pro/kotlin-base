@@ -73,6 +73,8 @@ interface ProduitDao {
     //     @Query("...")
     //     fun stockSuperieurA(seuilKg: Double): Flow<List<Produit>>
     // -----------------------------------------------------------------------
+    @Query("SELECT * FROM produits WHERE stockKg > :seuilkg")
+    fun stockSuperieurA (seuilkg : Double) : Flow<List<Produit>>
 
     // -----------------------------------------------------------------------
     // TODO 3 — AGRÉGAT : le stock TOTAL de tous les produits, en une valeur.
@@ -81,6 +83,8 @@ interface ProduitDao {
     //     @Query("...")
     //     fun stockTotal(): Flow<Double?>
     // -----------------------------------------------------------------------
+    @Query("SELECT SUM(stockKg) FROM produits")
+    fun stockTotal() : Flow<Double?>
 }
 
 // ---------------------------------------------------------------------------
